@@ -12,20 +12,135 @@ public class DB_functions {
             } else {
                 System.out.println("Connection Failed.");
             }
+
         } catch (Exception e) {
             System.out.println(e);
         }
 
         return conn;
     }
-    public void createTable(Connection conn, String table_name){
+
+    public void createTable (Connection conn, String table_name) {
         Statement statement;
-        try{
-            String query = "create table "+ table_name+ "(ID serial, username varchar(30), password varchar(30), primary key(ID))";
+        try {
+            String query = "create table " + table_name + "(id SERIAL, username varchar(20), password varchar(20), primary key(id));";
             statement = conn.createStatement();
             statement.executeUpdate(query);
-            System.out.println("Table created");
+            System.out.println("Table created.");
         } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void insertRow(Connection conn, String table_name, String name, String password){
+        Statement statement;
+        try{
+            String query = String.format("insert into %s(username,password) values('%s', '%s');", table_name, name, password);
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Row inserted.");
+        }catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void read_data(Connection conn, String table_name){
+        Statement statement;
+        ResultSet rs = null;
+        try{
+            String query = String.format("select * from %s", table_name);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+
+            while(rs.next()){
+                System.out.print(rs.getString("id") + " ");
+                System.out.print(rs.getString("username") + " ");
+                System.out.println(rs.getString("password") + " ");
+            }
+
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void update_name (Connection conn, String table_name, String old_name, String new_name){
+        Statement statement;
+        try{
+            String query = String.format("update %s set name = '%s' where name = '%s'", table_name, new_name, old_name);
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Name updated.");
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+
+    public void search_by_name(Connection conn, String table_name, String name){
+        Statement statement;
+        ResultSet rs = null;
+        try{
+            String query = String.format("select * from %s where name = '%s'", table_name, name);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()){
+                System.out.print(rs.getString("empid") + " ");
+                System.out.print(rs.getString("name") + " ");
+                System.out.println(rs.getString("address"));
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void search_by_id(Connection conn, String table_name, int id){
+        Statement statement;
+        ResultSet rs = null;
+        try{
+            String query = String.format("select * from %s where empid = %s", table_name, id);
+            statement = conn.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()){
+                System.out.print(rs.getString("empid") + " ");
+                System.out.print(rs.getString("name") + " ");
+                System.out.println(rs.getString("address"));
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void delete_row_by_name(Connection conn, String table_name, String username){
+        Statement statement;
+        try{
+            String query = String.format("delete from %s where username = '%s'", table_name, username);
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Data deleted");
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    public void delete_row_by_id(Connection conn, String table_name, int id){
+        Statement statement;
+        try{
+            String query = String.format("delete from %s where id = %s", table_name, id);
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Data deleted");
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void delete_table(Connection conn, String table_name){
+        Statement statement;
+        try{
+            String query = String.format("drop table %s", table_name);
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Table deleted");
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
