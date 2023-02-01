@@ -38,7 +38,7 @@ public class DB_functions {
             String query = String.format("insert into %s(username,password) values('%s', '%s');", table_name, name, password);
             statement = conn.createStatement();
             statement.executeUpdate(query);
-            System.out.println("Row inserted.");
+            System.out.println("Information is successfully inserted.");
         }catch (Exception e) {
             System.out.println(e);
         }
@@ -53,40 +53,39 @@ public class DB_functions {
             rs = statement.executeQuery(query);
 
             while(rs.next()){
-                System.out.print(rs.getString("id") + " ");
-                System.out.print(rs.getString("username") + " ");
-                System.out.println(rs.getString("password") + " ");
+                System.out.println(rs.getString("id") + " "+
+                        rs.getString("username") + " "+
+                        rs.getString("password") + " ");
             }
-
         } catch (Exception e){
             System.out.println(e);
         }
     }
 
-    public void update_name (Connection conn, String table_name, String old_name, String new_name){
+    public void update_username (Connection conn, String table_name, String old_username, String new_username){
         Statement statement;
         try{
-            String query = String.format("update %s set name = '%s' where name = '%s'", table_name, new_name, old_name);
+            String query = String.format("update %s set username = '%s' where username = '%s'", table_name, new_username, old_username);
             statement = conn.createStatement();
             statement.executeUpdate(query);
-            System.out.println("Name updated.");
+            System.out.println("Username updated.");
         } catch (Exception e){
             System.out.println(e);
         }
     }
 
 
-    public void search_by_name(Connection conn, String table_name, String name){
+    public void search_by_name(Connection conn, String table_name, String username){
         Statement statement;
         ResultSet rs = null;
         try{
-            String query = String.format("select * from %s where name = '%s'", table_name, name);
+            String query = String.format("select * from %s where username = '%s'", table_name, username);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()){
-                System.out.print(rs.getString("empid") + " ");
-                System.out.print(rs.getString("name") + " ");
-                System.out.println(rs.getString("address"));
+                System.out.print(rs.getString("id") + " ");
+                System.out.print(rs.getString("username") + " ");
+                System.out.println(rs.getString("password"));
             }
         } catch (Exception e){
             System.out.println(e);
@@ -97,13 +96,13 @@ public class DB_functions {
         Statement statement;
         ResultSet rs = null;
         try{
-            String query = String.format("select * from %s where empid = %s", table_name, id);
+            String query = String.format("select * from %s where id = %s", table_name, id);
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()){
-                System.out.print(rs.getString("empid") + " ");
-                System.out.print(rs.getString("name") + " ");
-                System.out.println(rs.getString("address"));
+                System.out.print(rs.getString("id") + " ");
+                System.out.print(rs.getString("username") + " ");
+                System.out.println(rs.getString("password"));
             }
         } catch (Exception e){
             System.out.println(e);
