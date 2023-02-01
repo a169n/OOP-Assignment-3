@@ -5,6 +5,8 @@ public class Main {
 
         DB_functions db = new DB_functions();
 
-        Connection conn = db.connect_to_db("postgres", "postgres", "1234");
+        Connection conn = db.connect_to_db("postgres", "postgres", "d05");
+        db.createTable(conn, "st");
     }
+
 }

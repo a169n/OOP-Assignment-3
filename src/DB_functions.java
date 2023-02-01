@@ -12,11 +12,21 @@ public class DB_functions {
             } else {
                 System.out.println("Connection Failed.");
             }
-
         } catch (Exception e) {
             System.out.println(e);
         }
 
         return conn;
+    }
+    public void createTable(Connection conn, String table_name){
+        Statement statement;
+        try{
+            String query = "create table "+ table_name+ "(ID serial, username varchar(30), password varchar(30), primary key(ID))";
+            statement = conn.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Table created");
+        } catch (Exception e){
+            System.out.println(e);
+        }
     }
 }
