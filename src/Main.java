@@ -6,5 +6,9 @@ public class Main {
         DB_functions db = new DB_functions();
 
         Connection conn = db.connect_to_db("postgres", "postgres", "1234");
+
+        Start_page app = new Start_page();
+
+//        app.start();
     }
 }
