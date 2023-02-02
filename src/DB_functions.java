@@ -1,7 +1,10 @@
 import java.sql.*;
 
 public class DB_functions {
+    //Enter your connection info here
     Connection conn = connect_to_db("postgres", "postgres", "d05");
+    //Enter table name
+    String table_name= "st";
     Statement statement= null;
 
     {
@@ -18,9 +21,7 @@ public class DB_functions {
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + dbname, username, password);
-            if (conn != null) {
-                System.out.println("Connection Established!");
-            } else {
+            if (conn == null) {
                 System.out.println("Connection Failed.");
             }
 
@@ -31,7 +32,7 @@ public class DB_functions {
         return conn;
     }
 
-    public void createTable (String table_name) {
+    public void createTable () {
         try {
             String query = "create table " + table_name + "(id SERIAL, username varchar(20), password varchar(20), primary key(id));";
             statement.executeUpdate(query);
@@ -41,7 +42,7 @@ public class DB_functions {
         }
     }
 
-    public void insertUser(String table_name, String username, String password){
+    public void insertUser(String username, String password){
         try{
             String query = String.format("insert into %s(username,password) values('%s', '%s');", table_name, username, password);
             statement.executeUpdate(query);
@@ -51,7 +52,7 @@ public class DB_functions {
         }
     }
 
-    public void read_data(String table_name){
+    public void read_data(){
         try{
             String query = String.format("select * from %s", table_name);
             rs = statement.executeQuery(query);
@@ -66,7 +67,7 @@ public class DB_functions {
         }
     }
 
-    public void update_username (String table_name, String old_username, String new_username){
+    public void update_username (String old_username, String new_username){
         try{
             String query = String.format("update %s set username = '%s' where username = '%s'", table_name, new_username, old_username);
             statement.executeUpdate(query);
@@ -77,7 +78,7 @@ public class DB_functions {
     }
 
 
-    public void search_by_name(String table_name, String username){
+    public void search_by_name(String username){
         try{
             String query = String.format("select * from %s where username = '%s'", table_name, username);
             rs = statement.executeQuery(query);
@@ -91,7 +92,7 @@ public class DB_functions {
         }
     }
 
-    public void search_by_id(String table_name, int id){
+    public void search_by_id(int id){
         try{
             String query = String.format("select * from %s where id = %s", table_name, id);
             rs = statement.executeQuery(query);
@@ -105,7 +106,7 @@ public class DB_functions {
         }
     }
 
-    public void delete_row_by_name(String table_name, String username){
+    public void delete_row_by_name(String username){
         try{
             String query = String.format("delete from %s where username = '%s'", table_name, username);
             statement.executeUpdate(query);
@@ -114,7 +115,7 @@ public class DB_functions {
             System.out.println(e);
         }
     }
-    public void delete_row_by_id(String table_name, int id){
+    public void delete_row_by_id(int id){
         try{
             String query = String.format("delete from %s where id = %s", table_name, id);
             statement.executeUpdate(query);
@@ -124,7 +125,7 @@ public class DB_functions {
         }
     }
 
-    public void delete_table(String table_name){
+    public void delete_table(){
         try{
             String query = String.format("drop table %s", table_name);
             statement.executeUpdate(query);
