@@ -10,7 +10,7 @@ public class Login extends Registration implements Password {
         //some statements
         return true;
     }
-    public void login(){
+    public static void login(){
         Scanner sc= new Scanner(System.in);
         System.out.println("Enter username");
 
