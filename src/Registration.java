@@ -21,9 +21,13 @@ public class Registration implements Password {
         System.out.print("Enter username: ");
         Scanner sc = new Scanner(System.in);
         String username = sc.nextLine();
-
+        if(db.checkName(username)){
+            System.out.print(username + " already exists"+"\n");
+            registration();
+        }
         System.out.print("Enter password: ");
         String password = sc.nextLine();
+
         while(!checkPasswordValidity(password)){
             System.out.println("Your password should contain lowercase, uppercase characters and numbers");
             password= sc.nextLine();

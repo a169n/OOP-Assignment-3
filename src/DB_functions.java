@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class DB_functions {
     //Enter your connection info here
-    Connection conn = connect_to_db("postgres", "postgres", "1234");
+    Connection conn = connect_to_db("postgres", "postgres", "qwerty");
     //Enter table name
     String table_name = "users";
     Statement statement= null;
@@ -54,6 +54,42 @@ public class DB_functions {
             System.out.println(e);
         }
     }
+//    public void checkUser(String username,String password){
+//        search_by_name(username);
+//        try{
+//            String query = String.format("select * from %s username ='%s' and password = '%s'", table_name, password);
+//            rs = statement.executeQuery(query);
+//            while (rs.next()){
+//            }
+//        } catch (Exception e){
+//            System.out.println(e);
+//        }
+//    }
+    public boolean checkName(String username){
+        try{
+            String query = String.format("select * from %s where username = '%s'", table_name, username);
+            rs = statement.executeQuery(query);
+            while (rs.next()){
+                return true;
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+    public void search_by_name(String username){
+        try{
+            String query = String.format("select * from %s where username = '%s'", table_name, username);
+            rs = statement.executeQuery(query);
+            while (rs.next()){
+                System.out.print(rs.getString("id") + " ");
+                System.out.print(rs.getString("username") + " ");
+                System.out.println(rs.getString("password"));
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
 
     public void read_data(){
         try{
@@ -80,20 +116,6 @@ public class DB_functions {
         }
     }
 
-
-    public void search_by_name(String username){
-        try{
-            String query = String.format("select * from %s where username = '%s'", table_name, username);
-            rs = statement.executeQuery(query);
-            while (rs.next()){
-                System.out.print(rs.getString("id") + " ");
-                System.out.print(rs.getString("username") + " ");
-                System.out.println(rs.getString("password"));
-            }
-        } catch (Exception e){
-            System.out.println(e);
-        }
-    }
 
     public void search_by_id(int id){
         try{

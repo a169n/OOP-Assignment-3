@@ -11,8 +11,11 @@ public class Login extends Registration implements Password {
         return true;
     }
     public void login(){
-        Scanner sc= new Scanner(System.in);
-        System.out.println("Enter username");
+        System.out.print("Enter username: ");
+        Scanner sc = new Scanner(System.in);
+        String username = sc.nextLine();
+        System.out.print("Enter password: ");
+        String password = sc.nextLine();
 
     }
 }
