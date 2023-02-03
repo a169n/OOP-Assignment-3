@@ -11,7 +11,7 @@ public class Start_page {
 
     Registration rg = new Registration();
     Login lg=new Login();
-    Connection conn = db.connect_to_db("postgres", "postgres", "d05");
+    Connection conn = db.connect_to_db("postgres", "postgres", "qwerty");
 
     public void start() {
         System.out.println("Welcome to TO-DO console application by ADGO!");

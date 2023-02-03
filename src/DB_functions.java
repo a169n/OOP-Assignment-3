@@ -62,18 +62,18 @@ public class DB_functions {
 //            System.out.println(e);
 //        }
 //    }
-    public boolean checkName(String username){
-        try{
-            String query = String.format("select * from %s where username = '%s'", table_name, username);
-            rs = statement.executeQuery(query);
-            while (rs.next()){
-                return true;
-            }
-        } catch (Exception e){
-            System.out.println(e);
+public boolean checkName(String username){
+    try{
+        String query = String.format("select * from %s where username = '%s'", table_name, username);
+        rs = statement.executeQuery(query);
+        while (rs.next()){
+            return true;
         }
-        return false;
+    } catch (Exception e){
+        System.out.println(e);
     }
+    return false;
+}
     public void search_by_name(String username){
         try{
             String query = String.format("select * from %s where username = '%s'", table_name, username);
