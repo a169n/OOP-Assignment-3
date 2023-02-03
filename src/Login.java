@@ -1,7 +1,9 @@
+import Interfaces.Password;
+
 import java.util.Scanner;
 
 public class Login extends Registration implements Password {
-    DB_functions db= new DB_functions();
+    DB_functions db = new DB_functions();
 
     @Override
     public boolean checkPasswordValidity(String password){

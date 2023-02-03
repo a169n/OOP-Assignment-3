@@ -2,9 +2,9 @@ import java.sql.*;
 
 public class DB_functions {
     //Enter your connection info here
-    Connection conn = connect_to_db("postgres", "postgres", "d05");
+    Connection conn = connect_to_db("postgres", "postgres", "1234");
     //Enter table name
-    String table_name= "st";
+    String table_name = "users";
     Statement statement= null;
 
     {
@@ -21,7 +21,10 @@ public class DB_functions {
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + dbname, username, password);
-            if (conn == null) {
+            if (conn != null) {
+                System.out.println("Connection Established!");
+            }
+            else{
                 System.out.println("Connection Failed.");
             }
 

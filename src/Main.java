@@ -1,11 +1,13 @@
-import java.sql.Connection;
-
 public class Main {
     public static void main(String[] args) {
         DB_functions db = new DB_functions();
-        Start_page st = new Start_page();
-        db.read_data();
+
+        String db_name = "postgres";
+
+        db.connect_to_db(db_name, "postgres", "1234");
+
+        Start_page app = new Start_page();
+
+        app.start();
     }
-
-
 }
