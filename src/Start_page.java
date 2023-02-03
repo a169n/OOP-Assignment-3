@@ -10,29 +10,23 @@ public class Start_page {
     DB_functions db = new DB_functions();
 
     Registration rg = new Registration();
-    Connection conn = db.connect_to_db("postgres", "postgres", "1234");
+    Login lg=new Login();
+    Connection conn = db.connect_to_db("postgres", "postgres", "qwerty");
 
     public void start() {
         System.out.println("Welcome to TO-DO console application by ADGO!");
 
-        System.out.println("1. Registration");
-        System.out.println("2. Login");
-
-        try {
-            System.out.println("Enter option (1-2): ");
-            int option = sc.nextInt();
-            if (option == 1) {
-                rg.registration();
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+        System.out.println("""
+                1.Registration
+                2.Login
+                """);
+        int option = sc.nextInt();
+        switch (option){
+            case 1:
+                Registration.registration();
+            case 2:
+                Login.login();
         }
-//            } else if (option == 2){
-//                //login
-//            } else {
-//                break;
-//            }
-
 
         System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 

@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class DB_functions {
     //Enter your connection info here
-    Connection conn = connect_to_db("postgres", "postgres", "1234");
+    Connection conn = connect_to_db("postgres", "postgres", "qwerty");
     //Enter table name
     String table_name = "users";
     Statement statement= null;
@@ -21,11 +21,8 @@ public class DB_functions {
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + dbname, username, password);
-            if (conn != null) {
-                System.out.println("Connection Established!");
-            }
-            else{
-                System.out.println("Connection Failed.");
+            if (conn == null) {
+                System.out.println("Connection Failed!");
             }
 
         } catch (Exception e) {
@@ -49,8 +46,44 @@ public class DB_functions {
         try{
             String query = String.format("insert into %s(username,password) values('%s', '%s');", table_name, username, password);
             statement.executeUpdate(query);
-            System.out.println("Information is successfully inserted.");
+            System.out.println("Information is successfully inserted!");
         }catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+//    public void checkUser(String username,String password){
+//        search_by_name(username);
+//        try{
+//            String query = String.format("select * from %s username ='%s' and password = '%s'", table_name, password);
+//            rs = statement.executeQuery(query);
+//            while (rs.next()){
+//            }
+//        } catch (Exception e){
+//            System.out.println(e);
+//        }
+//    }
+public boolean checkName(String username){
+    try{
+        String query = String.format("select * from %s where username = '%s'", table_name, username);
+        rs = statement.executeQuery(query);
+        while (rs.next()){
+            return true;
+        }
+    } catch (Exception e){
+        System.out.println(e);
+    }
+    return false;
+}
+    public void search_by_name(String username){
+        try{
+            String query = String.format("select * from %s where username = '%s'", table_name, username);
+            rs = statement.executeQuery(query);
+            while (rs.next()){
+                System.out.print(rs.getString("id") + " ");
+                System.out.print(rs.getString("username") + " ");
+                System.out.println(rs.getString("password"));
+            }
+        } catch (Exception e){
             System.out.println(e);
         }
     }
@@ -74,26 +107,12 @@ public class DB_functions {
         try{
             String query = String.format("update %s set username = '%s' where username = '%s'", table_name, new_username, old_username);
             statement.executeUpdate(query);
-            System.out.println("Username updated.");
+            System.out.println("Username is successfully updated.");
         } catch (Exception e){
             System.out.println(e);
         }
     }
 
-
-    public void search_by_name(String username){
-        try{
-            String query = String.format("select * from %s where username = '%s'", table_name, username);
-            rs = statement.executeQuery(query);
-            while (rs.next()){
-                System.out.print(rs.getString("id") + " ");
-                System.out.print(rs.getString("username") + " ");
-                System.out.println(rs.getString("password"));
-            }
-        } catch (Exception e){
-            System.out.println(e);
-        }
-    }
 
     public void search_by_id(int id){
         try{

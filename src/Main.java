@@ -4,7 +4,7 @@ public class Main {
 
         String db_name = "postgres";
 
-        db.connect_to_db(db_name, "postgres", "1234");
+        db.connect_to_db(db_name, "postgres", "qwerty");
 
         Start_page app = new Start_page();
 
