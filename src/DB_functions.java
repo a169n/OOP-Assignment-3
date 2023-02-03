@@ -21,11 +21,8 @@ public class DB_functions {
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + dbname, username, password);
-            if (conn != null) {
-                System.out.println("Connection Established!");
-            }
-            else{
-                System.out.println("Connection Failed.");
+            if (conn == null) {
+                System.out.println("Connection Failed!");
             }
 
         } catch (Exception e) {
@@ -49,7 +46,7 @@ public class DB_functions {
         try{
             String query = String.format("insert into %s(username,password) values('%s', '%s');", table_name, username, password);
             statement.executeUpdate(query);
-            System.out.println("Information is successfully inserted.");
+            System.out.println("Information is successfully inserted!");
         }catch (Exception e) {
             System.out.println(e);
         }
@@ -110,7 +107,7 @@ public class DB_functions {
         try{
             String query = String.format("update %s set username = '%s' where username = '%s'", table_name, new_username, old_username);
             statement.executeUpdate(query);
-            System.out.println("Username updated.");
+            System.out.println("Username is successfully updated.");
         } catch (Exception e){
             System.out.println(e);
         }
