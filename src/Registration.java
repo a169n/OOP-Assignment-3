@@ -3,7 +3,7 @@ import Interfaces.Password;
 import java.util.Scanner;
 
 public class Registration implements Password {
-    static DB_functions db = new DB_functions();
+    DB_functions db = new DB_functions();
 
     public boolean checkPasswordValidity(String password) {
         boolean first=false, second=false, third = false;
@@ -17,15 +17,18 @@ public class Registration implements Password {
         }
         return false;
     }
-    public static void registration () {
-        Registration reg = new Registration();
+    public void registration () {
         System.out.print("Enter username: ");
         Scanner sc = new Scanner(System.in);
         String username = sc.nextLine();
-
+        if(db.checkName(username)){
+            System.out.print(username + " already exists"+"\n");
+            registration();
+        }
         System.out.print("Enter password: ");
         String password = sc.nextLine();
-        while(reg.checkPasswordValidity(password)==false){
+
+        while(!checkPasswordValidity(password)){
             System.out.println("Your password should contain lowercase, uppercase characters and numbers");
             password= sc.nextLine();
         }
