@@ -1,31 +1,29 @@
-import java.sql.Connection;
 import java.util.Scanner;
-import java.util.InputMismatchException;
-
 
 public class Start_page {
-
-    String table_name = "users";
     Scanner sc = new Scanner(System.in);
-    DB_functions db = new DB_functions();
-
     Registration rg = new Registration();
-    Login lg=new Login();
-    Connection conn = db.connect_to_db("postgres", "postgres", "qwerty");
+    Login lg = new Login();
+    public void reg_or_log_text(){
+        System.out.println("1. Registration");
+        System.out.println("2. Login");
+        System.out.print("Choose the option: ");
+    }
 
     public void start() {
         System.out.println("Welcome to TO-DO console application by ADGO!");
 
-        System.out.println("""
-                1.Registration
-                2.Login
-                """);
+        reg_or_log_text();
+
         int option = sc.nextInt();
-        switch (option){
-            case 1:
-                Registration.registration();
-            case 2:
-                Login.login();
+        if (option == 1){
+            rg.registration();
+        }
+        else if (option == 2) {
+            lg.login();
+        }
+        else{
+            Exception e;
         }
 
         System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
