@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class DB_functions {
     //Enter your connection info here
-    Connection conn = connect_to_db("postgres", "postgres", "1234");
+    Connection conn = connect_to_db("postgres", "postgres", "qwerty");
     //Enter table name
     String table_name = "users";
     Statement statement= null;
@@ -76,7 +76,16 @@ public class DB_functions {
             System.out.println(e);
         }
     }
-
+    public boolean checkUser(String username,String password){
+        try{
+            String query = String.format("SELECT * FROM %s WHERE username = '%s' AND password = '%s'", table_name, username, password);
+            ResultSet result = statement.executeQuery(query);
+            return result.next();
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
     public void read_data(){
         try{
             String query = String.format("select * from %s", table_name);

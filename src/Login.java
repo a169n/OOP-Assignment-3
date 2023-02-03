@@ -2,7 +2,7 @@ import Interfaces.Password;
 import java.util.Scanner;
 
 public class Login extends Registration implements Password {
-    DB_functions db = new DB_functions();
+    static DB_functions db = new DB_functions();
     static Scanner sc = new Scanner(System.in);
 
     @Override
@@ -29,6 +29,10 @@ public class Login extends Registration implements Password {
         if(checkPasswordValidity(password)){
             // some statements
         }
-
+        if(db.checkUser(username,password)){
+            System.out.println("Welcome, "+username);
+        }
+        else{ System.out.println("Username or password is incorrect");
+        login();}
     }
 }
