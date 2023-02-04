@@ -9,24 +9,35 @@ public class Start_page {
         System.out.println("2. Login");
         System.out.print("Choose the option: ");
     }
+    public void taskFunctions_text(){
+        System.out.print("1. Add a new task");
+        System.out.print("2. Update the task");
+        System.out.print("3. Delete the task");
+        System.out.print("4. Show all tasks");
+        System.out.print("0. Exit");
+        System.out.print("Choose the option: ");
+    }
 
     public void start() {
-        System.out.println("Welcome to TO-DO console application by ADGO!");
+
 
         reg_or_log_text();
 
         int option = sc.nextInt();
-        if (option == 1){
-            rg.registration();
-        }
-        else if (option == 2) {
-            lg.login();
-        }
-        else{
-            Exception e;
+
+        switch (option) {
+            case 1 -> rg.registration();
+            case 2 -> lg.login();
+            default -> {
+                System.out.println("Enter either 1 or 2.");
+                System.out.println("━━━━━━━━━━━━━━━━━━━━━━");
+                start();
+            }
         }
 
-        System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+
+
+
 
 
     }
