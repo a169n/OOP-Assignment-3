@@ -1,8 +1,8 @@
 import java.sql.*;
 
-public class DB_functions {
+public class DB_methods {
     //Enter your connection info here
-    Connection conn = connect_to_db("postgres", "postgres", "qwerty");
+    Connection conn = connect_to_db("postgres", "postgres", "1234");
     //Enter table name
     String table_name = "users";
     Statement statement= null;
@@ -32,21 +32,38 @@ public class DB_functions {
         return conn;
     }
 
-    public void createTable () {
+    public void createTableUsers () {
         try {
             String query = "create table " + table_name + "(id SERIAL, username varchar(20), password varchar(20), primary key(id));";
             statement.executeUpdate(query);
-            System.out.println("Table created.");
+            System.out.println("Users table created.");
         } catch (Exception e){
             System.out.println(e);
         }
     }
-
+    public void createTableTasks () {
+        try {
+            String query = "create table " + "tasks" + "(id SERIAL, task_name varchar(20), primary key(id));";
+            statement.executeUpdate(query);
+            System.out.println("Tasks table created.");
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
     public void insertUser(String username, String password){
         try{
             String query = String.format("insert into %s(username,password) values('%s', '%s');", table_name, username, password);
             statement.executeUpdate(query);
-            System.out.println("Information is successfully inserted!");
+            System.out.println("New user added.");
+        }catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+    public void insertTask(String task){
+        try{
+            String query = String.format("insert into %s(task_name) values('%s');", "tasks", task);
+            statement.executeUpdate(query);
+            System.out.println("New task added.");
         }catch (Exception e) {
             System.out.println(e);
         }
@@ -100,12 +117,34 @@ public class DB_functions {
             System.out.println(e);
         }
     }
+    public void output_tasks(){
+        try{
+            String query = String.format("select * from %s", "tasks");
+            rs = statement.executeQuery(query);
+
+            while(rs.next()){
+                System.out.println(rs.getString("id") + " "+
+                        rs.getString("task_name"));
+            }
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
 
     public void update_username (String old_username, String new_username){
         try{
             String query = String.format("update %s set username = '%s' where username = '%s'", table_name, new_username, old_username);
             statement.executeUpdate(query);
             System.out.println("Username is successfully updated.");
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    public void update_the_task (String old_task_name, String new_task_name){
+        try{
+            String query = String.format("update %s set task_name = '%s' where task_name = '%s'", "tasks", new_task_name, old_task_name);
+            statement.executeUpdate(query);
+            System.out.println("Task is successfully updated.");
         } catch (Exception e){
             System.out.println(e);
         }
@@ -131,6 +170,15 @@ public class DB_functions {
             String query = String.format("delete from %s where username = '%s'", table_name, username);
             statement.executeUpdate(query);
             System.out.println("Data deleted");
+        } catch (Exception e){
+            System.out.println(e);
+        }
+    }
+    public void delete_task_by_name(String task_name){
+        try{
+            String query = String.format("delete from %s where task_name = '%s'", "tasks", task_name);
+            statement.executeUpdate(query);
+            System.out.println("Task deleted");
         } catch (Exception e){
             System.out.println(e);
         }

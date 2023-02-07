@@ -1,5 +1,5 @@
 package Interfaces;
 
-public interface Password {
+public interface IPassword {
     public boolean checkPasswordValidity(String password);
 }

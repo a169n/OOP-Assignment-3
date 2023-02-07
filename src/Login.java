@@ -1,15 +1,9 @@
-import Interfaces.Password;
+import Interfaces.IPassword;
 import java.util.Scanner;
 
-public class Login extends Registration implements Password {
-    static DB_functions db = new DB_functions();
+public class Login extends Registration implements IPassword {
+    static DB_methods db = new DB_methods();
     static Scanner sc = new Scanner(System.in);
-
-    @Override
-    public boolean checkPasswordValidity(String password){
-
-        return true;
-    }
 
     @Override
     public void check_duplicate(String username) {
@@ -19,20 +13,19 @@ public class Login extends Registration implements Password {
         }
     }
 
-
     public void login(){
         System.out.print("Enter username: ");
         String username = sc.nextLine();
         check_duplicate(username);
         System.out.print("Enter password: ");
         String password = sc.nextLine();
-        if(checkPasswordValidity(password)){
-            // some statements
-        }
+
         if(db.checkUser(username,password)){
             System.out.println("Welcome, "+username);
         }
-        else{ System.out.println("Username or password is incorrect");
-        login();}
+        else {
+            System.out.println("Incorrect username or password");
+            login();
+        }
     }
 }

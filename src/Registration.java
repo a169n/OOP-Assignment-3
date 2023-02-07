@@ -1,10 +1,10 @@
-import Interfaces.Password;
+import Interfaces.IPassword;
 
 import java.util.Scanner;
 
-public class Registration implements Password {
+public class Registration implements IPassword {
     Scanner sc = new Scanner(System.in);
-    static DB_functions db = new DB_functions();
+    static DB_methods db = new DB_methods();
 
     public boolean checkPasswordValidity(String password) {
         boolean first=false, second=false, third = false;
@@ -38,7 +38,7 @@ public class Registration implements Password {
             System.out.println("Your password should contain lowercase, uppercase characters and numbers");
             password = sc.nextLine();
         }
-        System.out.println("Confirm the password: ");
+        System.out.print("Confirm the password: ");
         String password2 = sc.nextLine();
         while(!password.equals(password2)){
             System.out.println("Your passwords don't match. Try again.");

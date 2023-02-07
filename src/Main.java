@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        DB_functions db = new DB_functions();
+        DB_methods db = new DB_methods();
 
         Start_page app = new Start_page();
 
