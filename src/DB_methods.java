@@ -140,9 +140,9 @@ public class DB_methods {
             System.out.println(e);
         }
     }
-    public void update_the_task (String old_task_name, String new_task_name){
+    public void update_the_task (int task_ID, String new_task_name){
         try{
-            String query = String.format("update %s set task_name = '%s' where task_name = '%s'", "tasks", new_task_name, old_task_name);
+            String query = String.format("update %s set task_name = '%s' where id = '%s'", "tasks", new_task_name, task_ID);
             statement.executeUpdate(query);
             System.out.println("Task is successfully updated.");
         } catch (Exception e){

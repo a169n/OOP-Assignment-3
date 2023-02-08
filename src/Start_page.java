@@ -45,6 +45,6 @@ public class Start_page {
             case 2 -> ts.task_update();
             case 3 -> ts.task_delete();
             case 4 -> ts.task_read();
+            case 0 -> start();
+                }}
         }
-    }
-}
