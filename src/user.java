@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class user {
-    public int id;
     private String username;
     private String position;
     private String password;
@@ -33,10 +32,6 @@ public abstract class user {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getUsername() {
