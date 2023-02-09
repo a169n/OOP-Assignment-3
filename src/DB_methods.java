@@ -2,9 +2,9 @@ import java.sql.*;
 
 public class DB_methods {
     //Enter your connection info here
-    Connection conn = connect_to_db("postgres", "postgres", "1234");
+    Connection conn = connect_to_db("testDB", "postgres", "d05");
     //Enter table name
-    String table_name = "users";
+    String table_name = "st";
     Statement statement= null;
 
     {

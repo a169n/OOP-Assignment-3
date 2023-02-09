@@ -1,9 +1,15 @@
 import Interfaces.IPassword;
 import java.util.Scanner;
 
-public class Login extends Registration implements IPassword {
-    DB_methods db = new DB_methods();
+public class Login extends DB_methods implements IPassword {
+    private static User currentUser = null;
+    public static User getCurrentUser() {
+        return currentUser;
+    }
 
+    public static void setCurrentUser(User user) {
+        currentUser = user;
+    }
     static Scanner sc = new Scanner(System.in);
 
     @Override
@@ -14,8 +20,8 @@ public class Login extends Registration implements IPassword {
 
 
     public void check_duplicate(String username) {
-        if(!db.checkName(username)){
-            System.out.print("No such user found" + '\n');
+        if(checkName(username)){
+            System.out.println("No such user found");
             login();
         }
     }
@@ -25,10 +31,11 @@ public class Login extends Registration implements IPassword {
         System.out.print("Enter username: ");
         String username = sc.nextLine();
         check_duplicate(username);
+
         System.out.print("Enter password: ");
         String password = sc.nextLine();
-        checkPasswordValidity(password);// some statements
-        if(db.checkUser(username,password)){
+        checkPasswordValidity(password);
+        if(checkUser(username,password)){
             System.out.println("Welcome, "+username);
             return;
         }
