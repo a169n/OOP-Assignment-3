@@ -6,5 +6,7 @@ public class Main {
         System.out.println("Welcome to TO-DO console application by ADGO!" + '\n');
 
         app.start();
+
+        // :)
     }
 }
