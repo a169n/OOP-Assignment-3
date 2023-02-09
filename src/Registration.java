@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Registration extends DB_methods implements IPassword {
     Scanner sc = new Scanner(System.in);
+    DB_methods db=new DB_methods();
 
     @Override
     public boolean checkPasswordValidity(String password) {
@@ -48,8 +49,8 @@ public class Registration extends DB_methods implements IPassword {
 
     public void registration () {
         System.out.print("Enter username: ");
-        String username = sc.nextLine();
-        check_duplicate(username);
+        db.username = sc.nextLine();
+        check_duplicate(db.username);
 
         System.out.print("Enter password: ");
         String password = sc.nextLine();
