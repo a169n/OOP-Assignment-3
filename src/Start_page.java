@@ -6,9 +6,11 @@ public class Start_page {
     Login lg = new Login();
     Task_methods ts = new Task_methods();
     public void reg_or_log_text(){
-        System.out.println("1. Registration");
-        System.out.println("2. Login");
-        System.out.print("Choose the option: ");
+        System.out.println("""
+                1.Registration
+                2.Login
+                Choose your option:
+                """);
     }
     public void taskFunctions_text(){
         System.out.println("1. Add a new task");

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Registration implements IPassword {
     Scanner sc = new Scanner(System.in);
-    static DB_methods db = new DB_methods();
+    DB_methods db = new DB_methods();
 
     public boolean checkPasswordValidity(String password) {
         boolean first=false, second=false, third = false;

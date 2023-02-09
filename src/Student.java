@@ -1,5 +1,5 @@
-public class Student extends user{
-    public Student(String username, String password, String position){
-        super(username, password, position);
+public class Student extends User {
+    public Student(String username, String password){
+        super(username, password, "student");
     }
 }
