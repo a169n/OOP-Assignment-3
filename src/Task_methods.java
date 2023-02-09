@@ -8,9 +8,9 @@ public class Task_methods {
     public void task_add_new(){
         System.out.print("Task name: ");
         String task = sc.nextLine();
-
-        db.insertTask(task);
+        db.insertTask(task, db.getID(db.username));
     }
+
     public void task_update(){
         task_read();
         System.out.print("Choose the task ID: ");
@@ -29,6 +29,6 @@ public class Task_methods {
         db.delete_task_by_name(task);
     }
     public void task_read(){
-        db.output_tasks();
+        db.output_tasks(db.getID(db.getUsername()));
     }
 }

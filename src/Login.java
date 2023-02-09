@@ -23,15 +23,15 @@ public class Login extends Registration implements IPassword {
 
     public void login(){
         System.out.print("Enter username: ");
-        String username = sc.nextLine();
-        check_duplicate(username);
+        db.username = sc.nextLine();
+        check_duplicate(db.username);
         System.out.print("Enter password: ");
         String password = sc.nextLine();
         checkPasswordValidity(password);// some statements
-        if(db.checkUser(username,password)){
-            System.out.println("Welcome, "+username);
+        if(db.checkUser(db.username,password)){
+            System.out.println("Welcome, "+db.username);
         }
-        else{ System.out.println("Username or password is incorrect");
+        else{ System.out.println("password is incorrect");
         login();}
     }
 }

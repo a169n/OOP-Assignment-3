@@ -6,6 +6,11 @@ public class DB_methods {
     //Enter table name
     String table_name = "users";
     Statement statement= null;
+    public static String username;
+
+    public String getUsername() {
+        return username;
+    }
 
     {
         try {
@@ -43,7 +48,7 @@ public class DB_methods {
     }
     public void createTableTasks () {
         try {
-            String query = "create table " + "tasks" + "(id SERIAL, task_name varchar(20), primary key(id));";
+            String query = "create table " + "tasks" + "(id SERIAL,user_id int, task_name varchar(20), primary key(id));";
             statement.executeUpdate(query);
             System.out.println("Tasks table created.");
         } catch (Exception e){
@@ -59,9 +64,9 @@ public class DB_methods {
             System.out.println(e);
         }
     }
-    public void insertTask(String task){
+    public void insertTask(String task,int user_id){
         try{
-            String query = String.format("insert into %s(task_name) values('%s');", "tasks", task);
+            String query = String.format("insert into %s(task_name,user_id) values('%s','%s');", "tasks", task,user_id);
             statement.executeUpdate(query);
             System.out.println("New task added.");
         }catch (Exception e) {
@@ -103,6 +108,21 @@ public class DB_methods {
         }
         return false;
     }
+public int getID(String username){
+    try{
+        String query = String.format("select id from %s where username = '%s'", table_name, username);
+        ResultSet result = statement.executeQuery(query);
+        if (result.next()) {
+            int id = result.getInt("id");
+            return id;
+        } else {
+            return 0;
+        }
+    } catch (Exception e){
+        System.out.println("Error executing query: " + e);
+    }
+    return 0;
+}
     public void read_data(){
         try{
             String query = String.format("select * from %s", table_name);
@@ -117,9 +137,9 @@ public class DB_methods {
             System.out.println(e);
         }
     }
-    public void output_tasks(){
+    public void output_tasks(int user_id){
         try{
-            String query = String.format("select * from %s", "tasks");
+            String query = String.format("select * from %s where user_id='%s'" , "tasks",user_id);
             rs = statement.executeQuery(query);
 
             while(rs.next()){
@@ -195,7 +215,7 @@ public class DB_methods {
 
     public void delete_table(){
         try{
-            String query = String.format("drop table %s", table_name);
+            String query = String.format("drop table %s", "tasks");
             statement.executeUpdate(query);
             System.out.println("Table deleted");
         } catch (Exception e) {

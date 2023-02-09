@@ -29,7 +29,8 @@ public class Registration implements IPassword {
     public void registration () {
         System.out.print("Enter username: ");
         String username = sc.nextLine();
-        check_duplicate(username);
+        db.username=username;
+        check_duplicate(db.username);
 
         System.out.print("Enter password: ");
         String password = sc.nextLine();
@@ -45,6 +46,6 @@ public class Registration implements IPassword {
             password2 = sc.nextLine();
         }
 
-        db.insertUser(username, password);
+        db.insertUser(db.username, password);
     }
 }
