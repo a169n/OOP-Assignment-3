@@ -108,6 +108,17 @@ public class DB_methods {
         }
         return false;
     }
+    public boolean checkPassword(String password){
+        try{
+            String query = String.format("SELECT * FROM %s WHERE password = '%s'", table_name, password);
+            ResultSet result = statement.executeQuery(query);
+            return result.next();
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+
     public int getID(String username){
         try{
             String query = String.format("select id from %s where username = '%s'", table_name, username);
@@ -141,15 +152,16 @@ public class DB_methods {
         try{
             String query = String.format("select * from %s where user_id='%s'" , "tasks",user_id);
             rs = statement.executeQuery(query);
-
+            int task_id = 1;
             while(rs.next()){
-                System.out.println(
-                        rs.getString("task_name"));
+                System.out.println(task_id + ". " + rs.getString("task_name"));
+                task_id++;
             }
         } catch (Exception e){
             System.out.println(e);
         }
     }
+
 
     public void update_username (String old_username, String new_username){
         try{
