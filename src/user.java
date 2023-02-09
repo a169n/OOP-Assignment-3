@@ -1,6 +1,6 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
 
 abstract class User {
@@ -11,10 +11,9 @@ abstract class User {
     static Connection connection = null;
     PreparedStatement ps =null;
 
-    static ResultSet rs = null;
+    //static ResultSet rs = null;
 
-    public User(){
-    }
+    //public User(){ }
     public User(String username, String position, String password){
         this.username = username;
         this.password = password;
