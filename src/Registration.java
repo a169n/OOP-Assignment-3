@@ -7,18 +7,39 @@ public class Registration implements IPassword {
     DB_methods db = new DB_methods();
 
 
+    @Override
     public boolean checkPasswordValidity(String password) {
-        boolean first=false, second=false, third = false;
-        if (password.length() < 8) return false;
+        boolean hasLowerCase = false;
+        boolean hasUpperCase = false;
+        boolean hasDigit = false;
+        boolean hasSpecialChar = false;
+
+        if (password.length() < 8) {
+            System.out.println("Password must be at least 8 characters long");
+            return false;
+        }
+
         for (int i = 0; i < password.length(); i++) {
             char c = password.charAt(i);
-            if ('a' <= c && c <= 'z') first = true;
-            if ('0' <= c && c <= '9') second = true;
-            if ('A' <= c && c <= 'Z') third = true;
-            if(first && second && third) return true;
+            if (Character.isLowerCase(c)) {
+                hasLowerCase = true;
+            } else if (Character.isUpperCase(c)) {
+                hasUpperCase = true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            } else if (!Character.isLetterOrDigit(c)) {
+                hasSpecialChar = true;
+            }
         }
-        return false;
+
+        if (!hasLowerCase || !hasUpperCase || !hasDigit || !hasSpecialChar) {
+            System.out.println("Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character");
+            return false;
+        }
+
+        return true;
     }
+
 
     public void check_duplicate(String username){
         if(db.checkName(username)){

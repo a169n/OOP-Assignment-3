@@ -30,8 +30,11 @@ public class Login extends Registration implements IPassword {
         checkPasswordValidity(password);// some statements
         if(db.checkUser(username,password)){
             System.out.println("Welcome, "+username);
+            return;
         }
-        else{ System.out.println("Username or password is incorrect");
-        login();}
+        else{
+            System.out.println("Username or password is incorrect");
+            login();
+        }
     }
 }

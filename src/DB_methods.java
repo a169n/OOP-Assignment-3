@@ -103,6 +103,16 @@ public class DB_methods {
         }
         return false;
     }
+    public boolean checkPassword(String password){
+        try{
+            String query = String.format("SELECT * FROM %s WHERE password = '%s'", table_name, password);
+            ResultSet result = statement.executeQuery(query);
+            return result.next();
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
     public void read_data(){
         try{
             String query = String.format("select * from %s", table_name);
