@@ -143,7 +143,7 @@ public class DB_methods {
             rs = statement.executeQuery(query);
 
             while(rs.next()){
-                System.out.println(rs.getString("id") + " "+
+                System.out.println(
                         rs.getString("task_name"));
             }
         } catch (Exception e){

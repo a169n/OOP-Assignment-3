@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Task_methods ex{
+public class Task_methods {
     DB_methods db = new DB_methods();
     Scanner sc = new Scanner(System.in);
 
