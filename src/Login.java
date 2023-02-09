@@ -20,7 +20,6 @@ public class Login extends Registration implements IPassword {
         }
     }
 
-
     public void login(){
         System.out.print("Enter username: ");
         db.username = sc.nextLine();
