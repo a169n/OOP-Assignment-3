@@ -12,7 +12,7 @@ public class Login extends Registration implements IPassword {
         return true;
     }
 
-    @Override
+
     public void check_duplicate(String username) {
         if(!db.checkName(username)){
             System.out.print("No such user found" + '\n');
