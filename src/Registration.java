@@ -2,10 +2,8 @@ import Interfaces.IPassword;
 
 import java.util.Scanner;
 
-public class Registration implements IPassword {
+public class Registration extends DB_methods implements IPassword {
     Scanner sc = new Scanner(System.in);
-    DB_methods db = new DB_methods();
-
 
     @Override
     public boolean checkPasswordValidity(String password) {
@@ -42,7 +40,7 @@ public class Registration implements IPassword {
 
 
     public void check_duplicate(String username){
-        if(db.checkName(username)){
+        if(checkName(username)){
             System.out.print(username + " already exists"+"\n");
             registration();
         }
@@ -51,8 +49,7 @@ public class Registration implements IPassword {
     public void registration () {
         System.out.print("Enter username: ");
         String username = sc.nextLine();
-        db.username=username;
-        check_duplicate(db.username);
+        check_duplicate(username);
 
         System.out.print("Enter password: ");
         String password = sc.nextLine();
@@ -68,6 +65,6 @@ public class Registration implements IPassword {
             password2 = sc.nextLine();
         }
 
-        db.insertUser(db.username, password);
+        insertUser(username, password);
     }
 }
