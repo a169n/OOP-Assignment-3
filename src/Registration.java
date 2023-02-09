@@ -35,7 +35,7 @@ public class Registration implements IPassword {
         String password = sc.nextLine();
 
         while(!checkPasswordValidity(password)){
-            System.out.println("Your password should contain lowercase, uppercase characters and numbers");
+            System.out.println("Your password should be at least 8 symbol long and contain lowercase, uppercase characters and numbers");
             password = sc.nextLine();
         }
         System.out.print("Confirm the password: ");
