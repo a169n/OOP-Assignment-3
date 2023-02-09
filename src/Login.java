@@ -27,9 +27,7 @@ public class Login extends Registration implements IPassword {
         check_duplicate(username);
         System.out.print("Enter password: ");
         String password = sc.nextLine();
-        if(checkPasswordValidity(password)){
-            // some statements
-        }
+        checkPasswordValidity(password);// some statements
         if(db.checkUser(username,password)){
             System.out.println("Welcome, "+username);
         }

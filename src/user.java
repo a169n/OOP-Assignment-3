@@ -3,7 +3,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class user {
+abstract class User {
     private String username;
     private String position;
     private String password;
@@ -13,9 +13,9 @@ public abstract class user {
 
     static ResultSet rs = null;
 
-    public user(){
+    public User(){
     }
-    public user(String username, String position, String password){
+    public User(String username, String position, String password){
         this.username = username;
         this.password = password;
         this.position = position;
