@@ -35,7 +35,7 @@ abstract class User {
     }
     public void insert() throws SQLException {
         new DB_methods();
-        ps = connection.prepareStatement("INSERT INTO users (username, password, role) values (?, ? ,?)");
+        ps = connection.prepareStatement("INSERT INTO users (username, password) values (?, ? ,?)");
         ps.setString(1, getUsername());
         ps.setString(2, getPassword());
         ps.execute();

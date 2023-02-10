@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Registration extends DB_methods implements IPassword {
     Scanner sc = new Scanner(System.in);
-    DB_methods db = new DB_methods();
+    DB_methods db=new DB_methods();
 
     @Override
     public boolean checkPasswordValidity(String password) {
