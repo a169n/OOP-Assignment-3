@@ -3,6 +3,13 @@ import Interfaces.IPassword;
 import java.util.Scanner;
 
 public class Registration extends DB_methods implements IPassword {
+    private static User currentUser = new User();
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+    public static void setCurrentUser(User user) {
+        currentUser = user;
+    }
     Scanner sc = new Scanner(System.in);
     DB_methods db = new DB_methods();
 
@@ -49,14 +56,13 @@ public class Registration extends DB_methods implements IPassword {
 
     public void registration () {
         System.out.print("Enter username: ");
-        db.username = sc.nextLine();
-        check_duplicate(db.username);
-
+        String username = sc.nextLine();
+        check_duplicate(username);
+        setCurrentUser(currentUser);
+        currentUser.setUsername(username);
         System.out.print("Enter password: ");
         String password = sc.nextLine();
-
         while(!checkPasswordValidity(password)){
-            System.out.println("Your password should be at least 8 symbol long and contain lowercase, uppercase characters and numbers");
             password = sc.nextLine();
         }
         System.out.print("Confirm the password: ");
@@ -65,7 +71,9 @@ public class Registration extends DB_methods implements IPassword {
             System.out.println("Your passwords don't match. Try again.");
             password2 = sc.nextLine();
         }
-
-        insertUser(username, password);
+        currentUser.setPassword(password);
+        currentUser.setID(getID(currentUser.getUsername()));
+        insertUser(currentUser.getUsername(), currentUser.getPassword());
     }
 }
+

@@ -1,39 +1,43 @@
 import Interfaces.IPassword;
 import java.util.Scanner;
 
-public class Login extends Registration implements IPassword {
-    DB_methods db = new DB_methods();
-
+public class Login extends DB_methods implements IPassword {
+    static User currentUser =new User();
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+    public static void setCurrentUser(User user) {
+        currentUser = user;
+    }
     static Scanner sc = new Scanner(System.in);
 
     @Override
     public boolean checkPasswordValidity(String password){
-
-        return true;
+        return checkUser(getCurrentUser().getUsername(), password);
     }
 
 
     public void check_duplicate(String username) {
-        if(!db.checkName(username)){
-            System.out.print("No such user found" + '\n');
+        if(!checkName(username)){
+            System.out.println("No such user found");
             login();
         }
     }
 
     public void login(){
         System.out.print("Enter username: ");
-        db.username = sc.nextLine();
-        check_duplicate(db.username);
-        System.out.print("Enter password: ");
+        String username = sc.nextLine();
+        setCurrentUser(currentUser);
+        check_duplicate(username);
+        currentUser.setUsername(username);
+        System.out.println("Enter the password:");
         String password = sc.nextLine();
-        checkPasswordValidity(password);// some statements
-        if(db.checkUser(db.username,password)){
-            System.out.println("Welcome, "+db.username);
-            return;
+        while(!checkPasswordValidity(password)){
+            System.out.println("The password is incorrect! Please try again:");
+            password= sc.nextLine();
         }
-        else{
-            System.out.println("Password is incorrect");
-            login();
-        }
+        System.out.println("Welcome, "+username);
+        currentUser.setPassword(password);
+        currentUser.setID(getID(currentUser.getUsername()));
     }
 }
