@@ -13,13 +13,13 @@ public class Task_methods extends DB_methods {
 
     public void task_update(){
         task_read();
-        System.out.print("Choose the task ID: ");
-        String task_ID = sc.nextLine();
+        System.out.print("Task name that will be updated:");
+        String task = sc.nextLine();
         //check if such task exists
         System.out.print("New task name: ");
         String new_task = sc.nextLine();
 
-        update_the_task(Integer.parseInt(task_ID), new_task);
+        update_the_task(task, new_task);
     }
     public void task_delete(){
         System.out.print("Task name that will be deleted: ");

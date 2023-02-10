@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class DB_methods {
     //Enter your connection info here
-    Connection conn = connect_to_db("postgres", "postgres", "1234");
+    Connection conn = connect_to_db("postgres", "postgres", "qwerty");
     //Enter table name
     String table_name = "users";
     Statement statement= null;
@@ -172,9 +172,9 @@ public class DB_methods {
             System.out.println(e);
         }
     }
-    public void update_the_task (int task_ID, String new_task_name){
+    public void update_the_task (String task, String new_task_name){
         try{
-            String query = String.format("update %s set task_name = '%s' where id = '%s'", "tasks", new_task_name, task_ID);
+            String query = String.format("update %s set task_name = '%s' where task_name = '%s'", "tasks", new_task_name, task);
             statement.executeUpdate(query);
             System.out.println("Task is successfully updated.");
         } catch (Exception e){
