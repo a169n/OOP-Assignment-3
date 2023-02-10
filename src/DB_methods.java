@@ -2,15 +2,10 @@ import java.sql.*;
 
 public class DB_methods {
     //Enter your connection info here
-    Connection conn = connect_to_db("postgres", "postgres", "qwerty");
+    Connection conn = connect_to_db("postgres", "postgres", "d05");
     //Enter table name
     String table_name = "users";
     Statement statement= null;
-    public static String username;
-
-    public String getUsername() {
-        return username;
-    }
 
     {
         try {

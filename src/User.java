@@ -3,8 +3,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-abstract class User {
+class User {
     private String username, password;
+    private int ID;
+
+    public User(String username) {
+        setUsername(username);
+    }
 
     static Connection connection = null;
     PreparedStatement ps =null;
@@ -16,11 +21,20 @@ abstract class User {
         setPassword(password);
         setUsername(username);
     }
+    public User(){
+    }
 
     public void setUsername(String name) {
         this.username = name;
     }
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public int getID() {
+        return ID;
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -32,13 +46,6 @@ abstract class User {
 
     public String getPassword() {
         return password;
-    }
-    public void insert() throws SQLException {
-        new DB_methods();
-        ps = connection.prepareStatement("INSERT INTO users (username, password) values (?, ? ,?)");
-        ps.setString(1, getUsername());
-        ps.setString(2, getPassword());
-        ps.execute();
     }
 
     @Override
