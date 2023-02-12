@@ -54,7 +54,6 @@ public class DB_methods {
         try{
             String query = String.format("insert into %s(username,password) values('%s', '%s');", table_name, username, password);
             statement.executeUpdate(query);
-            System.out.println("New user added.");
         }catch (Exception e) {
             System.out.println(e);
         }

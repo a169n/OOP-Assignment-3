@@ -16,20 +16,15 @@ public class Login extends DB_methods implements IPassword {
         return checkUser(getCurrentUser().getUsername(), password);
     }
 
-
-    public void check_duplicate(String username) {
-        if(!checkName(username)){
-            System.out.println("No such user found");
-            login();
-        }
-    }
-
     public void login(){
         System.out.print("Enter username: ");
         String username = sc.nextLine();
         setCurrentUser(currentUser);
-        check_duplicate(username);
-        currentUser.setUsername(username);
+        while(!checkName(username.toLowerCase())){
+            System.out.println("No such user found");
+            username= sc.nextLine();
+        }
+        currentUser.setUsername(username.toLowerCase());
         System.out.println("Enter the password:");
         String password = sc.nextLine();
         while(!checkPasswordValidity(password)){

@@ -26,16 +26,20 @@ public class Start_page {
                 4. Show all tasks
                 0. Exit
                 ==================
+                
+                
+                Choose the option:
                 """);
-        System.out.print("Choose the option: ");
     }
 
     public void reg_or_log(){
         int option1 = sc.nextInt();
 
         while (option1 != 1 && option1 != 2) {
-            System.out.println("Enter either 1 or 2.");
-            System.out.print("Choose the option: ");
+            System.out.println("""
+                    Enter either 1 or 2.
+                    Choose the option:
+                    """);
             option1 = sc.nextInt();
         }
 
@@ -53,7 +57,7 @@ public class Start_page {
                 case 2 -> ts.task_update();
                 case 3 -> ts.task_delete();
                 case 4 -> ts.task_read();
-                default -> System.out.println("Enter the appropriate option: ");
+                default -> System.out.print("Enter the appropriate option: ");
             }
 
             taskFunctions_text();

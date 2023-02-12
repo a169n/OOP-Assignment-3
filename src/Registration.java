@@ -11,7 +11,6 @@ public class Registration extends DB_methods implements IPassword {
         currentUser = user;
     }
     Scanner sc = new Scanner(System.in);
-    DB_methods db = new DB_methods();
 
     @Override
     public boolean checkPasswordValidity(String password) {
@@ -42,25 +41,18 @@ public class Registration extends DB_methods implements IPassword {
             System.out.println("Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character");
             return false;
         }
-
         return true;
-    }
-
-
-    public void check_duplicate(String username){
-        if(checkName(username)){
-            System.out.print(username + " already exists"+"\n");
-            registration();
-        }
     }
 
     public void registration () {
         System.out.print("Enter username: ");
         String username = sc.nextLine();
-        check_duplicate(username);
+        while(checkName(username.toLowerCase())){
+            System.out.print(username.toLowerCase() + " already exists"+"\n");
+            username= sc.nextLine();        }
         setCurrentUser(currentUser);
-        currentUser.setUsername(username);
-        System.out.print("Enter password: ");
+        currentUser.setUsername(username.toLowerCase());
+        System.out.print("Enter the password: ");
         String password = sc.nextLine();
         while(!checkPasswordValidity(password)){
             password = sc.nextLine();
@@ -68,12 +60,12 @@ public class Registration extends DB_methods implements IPassword {
         System.out.print("Confirm the password: ");
         String password2 = sc.nextLine();
         while(!password.equals(password2)){
-            System.out.println("Your passwords don't match. Try again.");
+            System.out.print("Your passwords don't match. Try again.");
             password2 = sc.nextLine();
         }
         currentUser.setPassword(password);
         currentUser.setID(getID(currentUser.getUsername()));
-        insertUser(currentUser.getUsername(), currentUser.getPassword());
+        insertUser(currentUser.getUsername().toLowerCase(), currentUser.getPassword());
     }
 }
 

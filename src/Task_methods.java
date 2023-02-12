@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Task_methods extends Login {
+public class Task_methods extends Login{
 
     Scanner sc = new Scanner(System.in);
 
