@@ -1,14 +1,14 @@
 import java.util.Scanner;
 
-public class Start_page {
+public class StartPage {
     Scanner sc = new Scanner(System.in);
     Registration rg = new Registration();
     Login lg = new Login();
-    Task_methods ts = new Task_methods();
+    TaskMethods ts = new TaskMethods();
 
-    DB_methods db= new DB_methods();
+    DBMethods db= new DBMethods();
 
-    public void reg_or_log_text() {
+    public void regOrLogText() {
         System.out.print("""
                 ==============
                 1.Registration
@@ -18,7 +18,7 @@ public class Start_page {
         System.out.print("Choose the option: ");
     }
 
-    public void taskFunctions_text() {
+    public void taskFunctionsText() {
         System.out.print("""
                 ==================
                 1. Add a new task
@@ -33,7 +33,7 @@ public class Start_page {
                 """);
     }
 
-    public void reg_or_log(){
+    public void regOrLog(){
         int option1 = sc.nextInt();
 
         while (option1 != 1 && option1 != 2) {
@@ -54,25 +54,25 @@ public class Start_page {
 
         while (option2 != 0) {
             switch (option2) {
-                case 1 -> ts.task_add_new();
-                case 2 -> ts.task_update();
-                case 3 -> ts.task_delete();
-                case 4 -> ts.task_read();
+                case 1 -> ts.taskAddNew();
+                case 2 -> ts.taskUpdate();
+                case 3 -> ts.taskDelete();
+                case 4 -> ts.taskRead();
                 default -> System.out.print("Enter the appropriate option: ");
             }
 
-            taskFunctions_text();
+            taskFunctionsText();
             option2 = sc.nextInt();
         }
 
         start();
     }
     public void start() {
-        reg_or_log_text();
+        regOrLogText();
 
-        reg_or_log();
+        regOrLog();
 
-        taskFunctions_text();
+        taskFunctionsText();
 
         taskFunctions();
     }

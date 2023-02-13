@@ -16,7 +16,6 @@ class User {
 
     static ResultSet rs = null;
 
-    //public User(){ }
     public User(String username, String password){
         setPassword(password);
         setUsername(username);

@@ -1,7 +1,7 @@
 import Interfaces.IPassword;
 import java.util.Scanner;
 
-public class Login extends DB_methods implements IPassword {
+public class Login extends DBMethods implements IPassword {
     static User currentUser =new User();
     public static User getCurrentUser() {
         return currentUser;

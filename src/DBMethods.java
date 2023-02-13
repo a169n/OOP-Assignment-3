@@ -1,8 +1,8 @@
 import java.sql.*;
 
-public class DB_methods {
+public class DBMethods {
     //Enter your connection info here
-    Connection conn = connect_to_db("postgres", "postgres", "d05");
+    Connection conn = connectToDb("postgres", "postgres", "0123123321");
     //Enter table name
     String table_name = "users";
     Statement statement= null;
@@ -17,7 +17,7 @@ public class DB_methods {
 
     ResultSet rs = null;
 
-    public Connection connect_to_db(String dbname, String username, String password) {
+    public Connection connectToDb(String dbname, String username, String password) {
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/" + dbname, username, password);
@@ -79,7 +79,7 @@ public class DB_methods {
         }
         return false;
     }
-    public void search_by_name(String username){
+    public void searchByName(String username){
         try{
             String query = String.format("select * from %s where username = '%s'", table_name, username);
             rs = statement.executeQuery(query);
@@ -128,7 +128,7 @@ public class DB_methods {
         }
         return 0;
     }
-    public void read_data(){
+    public void readData(){
         try{
             String query = String.format("select * from %s", table_name);
             rs = statement.executeQuery(query);
@@ -142,7 +142,7 @@ public class DB_methods {
             System.out.println(e);
         }
     }
-    public void output_tasks(int user_id){
+    public void outputTasks(int user_id){
         try{
             String query = String.format("select * from %s where user_id='%s'" , "tasks",user_id);
             rs = statement.executeQuery(query);
@@ -157,7 +157,7 @@ public class DB_methods {
     }
 
 
-    public void update_username (String old_username, String new_username){
+    public void updateUsername(String old_username, String new_username){
         try{
             String query = String.format("update %s set username = '%s' where username = '%s'", table_name, new_username, old_username);
             statement.executeUpdate(query);
@@ -166,7 +166,7 @@ public class DB_methods {
             System.out.println(e);
         }
     }
-    public void update_the_task (String task, String new_task_name){
+    public void updateTheTask(String task, String new_task_name){
         try{
             String query = String.format("update %s set task_name = '%s' where task_name = '%s'", "tasks", new_task_name, task);
             statement.executeUpdate(query);
@@ -177,7 +177,7 @@ public class DB_methods {
     }
 
 
-    public void search_by_id(int id){
+    public void searchById(int id){
         try{
             String query = String.format("select * from %s where id = %s", table_name, id);
             rs = statement.executeQuery(query);
@@ -191,7 +191,7 @@ public class DB_methods {
         }
     }
 
-    public void delete_row_by_name(String username){
+    public void deleteRowByName(String username){
         try{
             String query = String.format("delete from %s where username = '%s'", table_name, username);
             statement.executeUpdate(query);
@@ -200,7 +200,7 @@ public class DB_methods {
             System.out.println(e);
         }
     }
-    public void delete_task_by_name(String task_name){
+    public void deleteTaskByName(String task_name){
         try{
             String query = String.format("delete from %s where task_name = '%s'", "tasks", task_name);
             statement.executeUpdate(query);
@@ -209,7 +209,7 @@ public class DB_methods {
             System.out.println(e);
         }
     }
-    public void delete_row_by_id(int id){
+    public void deleteRowById(int id){
         try{
             String query = String.format("delete from %s where id = %s", table_name, id);
             statement.executeUpdate(query);
@@ -219,7 +219,7 @@ public class DB_methods {
         }
     }
 
-    public void delete_table(){
+    public void deleteTable(){
         try{
             String query = String.format("drop table %s", "tasks");
             statement.executeUpdate(query);
