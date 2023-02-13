@@ -5,6 +5,7 @@ public class Start_page {
     Registration rg = new Registration();
     Login lg = new Login();
     Task_methods ts = new Task_methods();
+
     DB_methods db= new DB_methods();
 
     public void reg_or_log_text() {
