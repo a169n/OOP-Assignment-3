@@ -21,17 +21,17 @@ public class Login extends DBMethods implements IPassword {
         String username = sc.nextLine();
         setCurrentUser(currentUser);
         while(!checkName(username.toLowerCase())){
-            System.out.println("No such user found");
+            System.out.print("No such user found! Please try again: ");
             username= sc.nextLine();
         }
         currentUser.setUsername(username.toLowerCase());
-        System.out.println("Enter the password:");
+        System.out.print("Enter the password: ");
         String password = sc.nextLine();
         while(!checkPasswordValidity(password)){
-            System.out.println("The password is incorrect! Please try again:");
+            System.out.print("The password is incorrect! Please try again: ");
             password= sc.nextLine();
         }
-        System.out.println("Welcome, "+username);
+        System.out.println("Welcome, "+username + "!");
         currentUser.setPassword(password);
         currentUser.setID(getID(currentUser.getUsername()));
     }

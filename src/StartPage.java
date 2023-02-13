@@ -25,10 +25,9 @@ public class StartPage {
                 2. Update the task
                 3. Delete the task
                 4. Show all tasks
+                5. Show task deadline
                 0. Exit
                 ==================
-                
-                
                 Choose the option:
                 """);
     }
@@ -58,6 +57,7 @@ public class StartPage {
                 case 2 -> ts.taskUpdate();
                 case 3 -> ts.taskDelete();
                 case 4 -> ts.taskRead();
+                case 5 -> ts.taskDeadline();
                 default -> System.out.print("Enter the appropriate option: ");
             }
 

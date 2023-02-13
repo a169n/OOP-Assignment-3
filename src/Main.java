@@ -4,9 +4,7 @@ public class Main {
         StartPage app = new StartPage();
 
         System.out.println("Welcome to TO-DO console application by ADGO!");
-
         app.start();
-
         // :))))
     }
 }

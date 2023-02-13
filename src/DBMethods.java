@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class DBMethods {
     //Enter your connection info here
-    Connection conn = connectToDb("postgres", "postgres", "0123123321");
+    Connection conn = connectToDb("postgres", "postgres", "d05");
     //Enter table name
     String table_name = "users";
     Statement statement= null;
@@ -43,7 +43,7 @@ public class DBMethods {
     }
     public void createTableTasks () {
         try {
-            String query = "create table " + "tasks" + "(id SERIAL,user_id int, task_name varchar(20), primary key(id));";
+            String query = "create table " + "tasks" + "(id SERIAL,user_id int, task_name varchar(20), deadline varchar(25), importance int, primary key(id));";
             statement.executeUpdate(query);
             System.out.println("Tasks table created.");
         } catch (Exception e){
@@ -58,9 +58,9 @@ public class DBMethods {
             System.out.println(e);
         }
     }
-    public void insertTask(String task,int user_id){
+    public void insertTask(String task, String deadline, int importance, int user_id){
         try{
-            String query = String.format("insert into %s(task_name,user_id) values('%s','%s');", "tasks", task,user_id);
+            String query = String.format("insert into %s(task_name,deadline,importance,user_id) values('%s','%s','%s','%s');", "tasks", task, deadline, importance, user_id);
             statement.executeUpdate(query);
             System.out.println("New task added.");
         }catch (Exception e) {
@@ -170,25 +170,27 @@ public class DBMethods {
         try{
             String query = String.format("update %s set task_name = '%s' where task_name = '%s'", "tasks", new_task_name, task);
             statement.executeUpdate(query);
-            System.out.println("Task is successfully updated.");
+            System.out.println("Task i                                                                                                                                                                                                                                     s successfully updated.");
         } catch (Exception e){
             System.out.println(e);
         }
     }
 
 
-    public void searchById(int id){
+    public String searchByTask(String name){
         try{
-            String query = String.format("select * from %s where id = %s", table_name, id);
+            String query = String.format("select * from %s where task_name = '%s'", "tasks",  name);
             rs = statement.executeQuery(query);
-            while (rs.next()){
-                System.out.print(rs.getString("id") + " ");
-                System.out.print(rs.getString("username") + " ");
-                System.out.println(rs.getString("password"));
+            if (rs.next()) {
+                String deadline = rs.getString("deadline");
+                return deadline;
+            } else {
+                return "";
             }
         } catch (Exception e){
             System.out.println(e);
         }
+        return "";
     }
 
     public void deleteRowByName(String username){

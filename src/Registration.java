@@ -20,7 +20,7 @@ public class Registration extends DBMethods implements IPassword {
         boolean hasSpecialChar = false;
 
         if (password.length() < 8) {
-            System.out.println("Password must be at least 8 characters long");
+            System.out.println("Password must be at least 8 characters long! Please try again");
             return false;
         }
 
@@ -38,7 +38,8 @@ public class Registration extends DBMethods implements IPassword {
         }
 
         if (!hasLowerCase || !hasUpperCase || !hasDigit || !hasSpecialChar) {
-            System.out.println("Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character");
+            System.out.println("Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character \n"+
+                    "Please try again!");
             return false;
         }
         return true;
@@ -48,7 +49,7 @@ public class Registration extends DBMethods implements IPassword {
         System.out.print("Enter username: ");
         String username = sc.nextLine();
         while(checkName(username.toLowerCase())){
-            System.out.print(username.toLowerCase() + " already exists"+"\n");
+            System.out.print("Username " + username.toLowerCase() + " already exists! Please try again: ");
             username= sc.nextLine();        }
         setCurrentUser(currentUser);
         currentUser.setUsername(username.toLowerCase());
@@ -60,7 +61,7 @@ public class Registration extends DBMethods implements IPassword {
         System.out.print("Confirm the password: ");
         String password2 = sc.nextLine();
         while(!password.equals(password2)){
-            System.out.print("Your passwords don't match. Try again.");
+            System.out.print("Your passwords don't match! Please try again: ");
             password2 = sc.nextLine();
         }
         currentUser.setPassword(password);
