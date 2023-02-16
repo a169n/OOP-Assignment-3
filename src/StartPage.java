@@ -8,16 +8,6 @@ public class StartPage {
 
     DBMethods db= new DBMethods();
 
-    public void regOrLogText() {
-        System.out.print("""
-                ==============
-                1.Registration
-                2.Login
-                ==============
-                """);
-        System.out.print("Choose the option: ");
-    }
-
     public void taskFunctionsText() {
         System.out.print("""
                 ==================
@@ -33,8 +23,14 @@ public class StartPage {
     }
 
     public void regOrLog(){
+        System.out.print("""
+                ==============
+                1.Registration
+                2.Login
+                ==============
+                """);
+        System.out.print("Choose the option: ");
         int option1 = sc.nextInt();
-
         while (option1 != 1 && option1 != 2) {
             System.out.println("""
                     Enter either 1 or 2.
@@ -42,7 +38,6 @@ public class StartPage {
                     """);
             option1 = sc.nextInt();
         }
-
         switch (option1){
             case 1 -> rg.registration();
             case 2 -> lg.login();
@@ -50,7 +45,6 @@ public class StartPage {
     }
     public void taskFunctions(){
         int option2 = sc.nextInt();
-
         while (option2 != 0) {
             switch (option2) {
                 case 1 -> ts.taskAddNew();
@@ -58,19 +52,14 @@ public class StartPage {
                 case 3 -> ts.taskDelete();
                 case 4 -> ts.taskRead();
                 case 5 -> ts.taskDeadline();
-                case 6 -> rg.info();
-                default -> System.out.print("Enter the appropriate option: ");
+                default -> System.out.print("Enter an appropriate option: ");
             }
-
             taskFunctionsText();
             option2 = sc.nextInt();
         }
-
         start();
     }
     public void start() {
-        regOrLogText();
-
         regOrLog();
 
         taskFunctionsText();

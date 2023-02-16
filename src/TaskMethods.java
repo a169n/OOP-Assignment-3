@@ -20,7 +20,7 @@ public class TaskMethods extends DBMethods{
             currentUser=  rg.getCurrentUser();
         }
     }
-    static Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
     public void taskAddNew(){
         setCurrentUser();
         System.out.print("Task name: ");
@@ -65,9 +65,8 @@ public class TaskMethods extends DBMethods{
         return true;
     }
     public void taskDeadline(){
-        setCurrentUser();
         System.out.print("Enter task name: ");
-        String task = sc.nextLine();
+        String task = sc.next();
         String stopDate = searchByTask(task);
 
         String startDate =String.valueOf(LocalDate.now()) + " " + String.valueOf(LocalTime.now()).substring(0, 8) ;

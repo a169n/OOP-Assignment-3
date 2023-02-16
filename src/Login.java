@@ -33,7 +33,7 @@ public class Login extends DBMethods implements IPassword {
             System.out.print("The password is incorrect! Please try again: ");
             password= sc.nextLine();
         }
-        System.out.println("Welcome, "+username + "!");
+        System.out.println("Welcome, "+currentUser.getUsername() + "!");
         currentUser.setPassword(password);
         currentUser.setID(getUserId(currentUser.getUsername()));
     }

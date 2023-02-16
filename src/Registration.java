@@ -65,15 +65,10 @@ public class Registration extends DBMethods implements IPassword {
             System.out.print("Your passwords don't match! Please try again: ");
             password2 = sc.nextLine();
         }
+        System.out.println("Welcome, "+currentUser.getUsername() + "!");
         currentUser.setPassword(password);
         insertUser(currentUser.getUsername().toLowerCase(), currentUser.getPassword());
         currentUser.setID(getUserId(currentUser.getUsername()));
-    }
-    public void info(){
-        System.out.println("id: " + getUserId(currentUser.getUsername()));
-        System.out.println("id from getter: "+ currentUser.getID());
-        System.out.println("username: " + currentUser.getUsername());
-        System.out.println("password: " + currentUser.getPassword());
     }
 }
 
