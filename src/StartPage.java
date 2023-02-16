@@ -43,7 +43,7 @@ public class StartPage {
             option1 = sc.nextInt();
         }
 
-        switch (option1) {
+        switch (option1){
             case 1 -> rg.registration();
             case 2 -> lg.login();
         }
@@ -58,6 +58,7 @@ public class StartPage {
                 case 3 -> ts.taskDelete();
                 case 4 -> ts.taskRead();
                 case 5 -> ts.taskDeadline();
+                case 6 -> rg.info();
                 default -> System.out.print("Enter the appropriate option: ");
             }
 

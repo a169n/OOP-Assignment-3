@@ -1,12 +1,12 @@
 import java.sql.*;
 
 public class DBMethods {
+
     //Enter your connection info here
     Connection conn = connectToDb("postgres", "postgres", "d05");
     //Enter table name
     String table_name = "users";
     Statement statement= null;
-
     {
         try {
             statement = conn.createStatement();
@@ -28,7 +28,6 @@ public class DBMethods {
         } catch (Exception e) {
             System.out.println(e);
         }
-
         return conn;
     }
 
@@ -113,7 +112,7 @@ public class DBMethods {
         return false;
     }
 
-    public int getID(String username){
+    public int getUserId(String username){
         try{
             String query = String.format("select id from %s where username = '%s'", table_name, username);
             ResultSet result = statement.executeQuery(query);
@@ -185,12 +184,12 @@ public class DBMethods {
                 String deadline = rs.getString("deadline");
                 return deadline;
             } else {
-                return "";
+                return null;
             }
         } catch (Exception e){
             System.out.println(e);
         }
-        return "";
+        return null;
     }
 
     public void deleteRowByName(String username){

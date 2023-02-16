@@ -23,8 +23,8 @@ class User {
     public User(){
     }
 
-    public void setUsername(String name) {
-        this.username = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setID(int ID) {

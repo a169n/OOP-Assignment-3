@@ -3,14 +3,26 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-public class TaskMethods extends Login{
+public class TaskMethods extends DBMethods{
+    static Registration rg = new Registration();
+    static Login lg = new Login();
+    public static User currentUser= new User();
+    public static void setCurrentUser(){
+        if (lg.regOrLog){
+            currentUser = lg.getCurrentUser();
+        }
+        if(rg.regOrLog){
+            currentUser=  rg.getCurrentUser();
+        }
+    }
     static Scanner sc = new Scanner(System.in);
-
     public void taskAddNew(){
+        setCurrentUser();
         System.out.print("Task name: ");
         String task = sc.nextLine();
         System.out.print("Deadline(yyyy-MM-dd HH:mm:ss): ");
@@ -21,7 +33,7 @@ public class TaskMethods extends Login{
         }
         System.out.print("Rate importance from 1-5: ");
         int importance= sc.nextInt();
-        insertTask(task, deadline, importance, getCurrentUser().getID());
+        insertTask(task, deadline, importance, currentUser.getID());
     }
 
     public void taskUpdate(){
@@ -42,7 +54,7 @@ public class TaskMethods extends Login{
         deleteTaskByName(task);
     }
     public void taskRead(){
-        outputTasks(getID(getCurrentUser().getUsername()));
+        outputTasks(getUserId(currentUser.getUsername()));
     }
 
 
@@ -53,16 +65,17 @@ public class TaskMethods extends Login{
         return true;
     }
     public void taskDeadline(){
+        setCurrentUser();
         System.out.print("Enter task name: ");
         String task = sc.nextLine();
         String stopDate = searchByTask(task);
-        if(stopDate==""){
-            System.out.print("No such task found!");
-            return;
-        }
+
         String startDate =String.valueOf(LocalDate.now()) + " " + String.valueOf(LocalTime.now()).substring(0, 8) ;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
+        if(Objects.equals(stopDate, null)){
+            System.out.print("No such task found!");
+            stopDate= sc.nextLine();
+        }
         Date d1 = null;
         Date d2 = null;
         try {

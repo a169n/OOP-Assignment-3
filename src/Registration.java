@@ -3,7 +3,8 @@ import Interfaces.IPassword;
 import java.util.Scanner;
 
 public class Registration extends DBMethods implements IPassword {
-    private static User currentUser = new User();
+    static boolean regOrLog= false;
+    public static User currentUser = new User();
     public static User getCurrentUser() {
         return currentUser;
     }
@@ -11,7 +12,6 @@ public class Registration extends DBMethods implements IPassword {
         currentUser = user;
     }
     Scanner sc = new Scanner(System.in);
-
     @Override
     public boolean checkPasswordValidity(String password) {
         boolean hasLowerCase = false;
@@ -46,6 +46,7 @@ public class Registration extends DBMethods implements IPassword {
     }
 
     public void registration () {
+        regOrLog = true;
         System.out.print("Enter username: ");
         String username = sc.nextLine();
         while(checkName(username.toLowerCase())){
@@ -65,8 +66,14 @@ public class Registration extends DBMethods implements IPassword {
             password2 = sc.nextLine();
         }
         currentUser.setPassword(password);
-        currentUser.setID(getID(currentUser.getUsername()));
         insertUser(currentUser.getUsername().toLowerCase(), currentUser.getPassword());
+        currentUser.setID(getUserId(currentUser.getUsername()));
+    }
+    public void info(){
+        System.out.println("id: " + getUserId(currentUser.getUsername()));
+        System.out.println("id from getter: "+ currentUser.getID());
+        System.out.println("username: " + currentUser.getUsername());
+        System.out.println("password: " + currentUser.getPassword());
     }
 }
 

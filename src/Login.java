@@ -2,7 +2,8 @@ import Interfaces.IPassword;
 import java.util.Scanner;
 
 public class Login extends DBMethods implements IPassword {
-    static User currentUser =new User();
+    static boolean regOrLog= false;
+    public static User currentUser =new User();
     public static User getCurrentUser() {
         return currentUser;
     }
@@ -17,6 +18,7 @@ public class Login extends DBMethods implements IPassword {
     }
 
     public void login(){
+        regOrLog = true;
         System.out.print("Enter username: ");
         String username = sc.nextLine();
         setCurrentUser(currentUser);
@@ -33,6 +35,6 @@ public class Login extends DBMethods implements IPassword {
         }
         System.out.println("Welcome, "+username + "!");
         currentUser.setPassword(password);
-        currentUser.setID(getID(currentUser.getUsername()));
+        currentUser.setID(getUserId(currentUser.getUsername()));
     }
 }
