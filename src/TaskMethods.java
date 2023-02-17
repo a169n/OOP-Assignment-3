@@ -57,7 +57,9 @@ public class TaskMethods extends DBMethods{
         outputTasks(getUserId(currentUser.getUsername()));
     }
 
-
+    public void sortTaskByImportance(){
+        sortByImportance(currentUser.getID());
+    }
     public boolean checkCorrectPattern(String start_date){
         if (!Pattern.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}", start_date)) {
             return false;

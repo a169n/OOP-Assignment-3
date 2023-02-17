@@ -16,6 +16,7 @@ public class StartPage {
                 3. Delete the task
                 4. Show all tasks
                 5. Show task deadline
+                6. Sort tasks by the importance
                 0. Exit
                 ==================
                 Choose the option:
@@ -52,6 +53,7 @@ public class StartPage {
                 case 3 -> ts.taskDelete();
                 case 4 -> ts.taskRead();
                 case 5 -> ts.taskDeadline();
+                case 6 -> ts.sortTaskByImportance();
                 default -> System.out.print("Enter an appropriate option: ");
             }
             taskFunctionsText();

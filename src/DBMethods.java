@@ -3,9 +3,9 @@ import java.sql.*;
 public class DBMethods {
 
     //Enter your connection info here
-    Connection conn = connectToDb("postgres", "postgres", "d05");
+    Connection conn = connectToDb("postgres", "postgres", "qwerty");
     //Enter table name
-    String table_name = "users";
+    String table_name = "users ";
     Statement statement= null;
     {
         try {
@@ -154,7 +154,42 @@ public class DBMethods {
             System.out.println(e);
         }
     }
-
+public void sortByImportance(int user_id){
+        int[] importance = new int[100];
+        String[] task_names = new String[100];
+    try{
+        String query = String.format("select * from %s where user_id='%s'" , "tasks",user_id);
+        rs = statement.executeQuery(query);
+        int counter = 0;
+        int task_id = 1;
+        while(rs.next()){
+            importance[counter]=rs.getInt("importance");
+            task_names[counter]=rs.getString("task_name");
+            counter++;
+        }
+        int temp=0;
+        String temp1;
+        for(int i=0;i<=counter;i++){
+            for(int k=0;k<=counter-i;k++) {
+                if(importance[k]<importance[k+1]){
+                    temp=importance[k];
+                    importance[k]=importance[k+1];
+                    importance[k+1]=temp;
+                    temp1=task_names[k];
+                    task_names[k]=task_names[k+1];
+                    task_names[k+1]=temp1;
+                }
+            }
+            }
+        for(int i=0;i<counter;i++){
+            System.out.println(task_id+". "+task_names[i]+". Importance: "+importance[i]);
+            task_id++;
+        }
+        }
+    catch (Exception e){
+        System.out.println(e);
+    }
+}
 
     public void updateUsername(String old_username, String new_username){
         try{
