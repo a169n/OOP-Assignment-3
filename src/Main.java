@@ -3,7 +3,8 @@ public class Main {
         DBMethods db =new DBMethods();
         StartPage app = new StartPage();
         System.out.println("Welcome to TO-DO console application by ADGO!");
+        db.createTableUsers();
+        db.createTableTasks();
         app.start();
-        // :))))
     }
 }

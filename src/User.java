@@ -7,20 +7,12 @@ class User {
     private String username, password;
     private int ID;
 
-    public User(String username) {
-        setUsername(username);
+    public User(){
     }
 
-    static Connection connection = null;
-    PreparedStatement ps =null;
-
-    static ResultSet rs = null;
-
-    public User(String username, String password){
+    public User(String username, String password) {
         setPassword(password);
         setUsername(username);
-    }
-    public User(){
     }
 
     public void setUsername(String username) {

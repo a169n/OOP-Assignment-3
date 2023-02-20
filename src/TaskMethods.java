@@ -23,20 +23,21 @@ public class TaskMethods extends DBMethods{
     Scanner sc = new Scanner(System.in);
     public void taskAddNew(){
         setCurrentUser();
-        System.out.print("Task name: ");
+        System.out.println("Task name: ");
         String task = sc.nextLine();
-        System.out.print("Deadline(yyyy-MM-dd HH:mm:ss): ");
+        System.out.println("Deadline(yyyy-MM-dd HH:mm:ss): ");
         String deadline = sc.nextLine();
         while(!checkCorrectPattern(deadline)){
-            System.out.print("Please enter the deadline following this pattern 'yyyy-MM-dd HH:mm:ss': ");
+            System.out.println("Please enter the deadline following this pattern 'yyyy-MM-dd HH:mm:ss': ");
             deadline= sc.nextLine();
         }
         System.out.print("Rate importance from 1-5: ");
-        int importance= sc.nextInt();
-        insertTask(task, deadline, importance, currentUser.getID());
+        String importance= sc.nextLine();
+        insertTask(task, deadline, Integer.parseInt(importance), currentUser.getID());
     }
 
     public void taskUpdate(){
+        setCurrentUser();
         taskRead();
         System.out.print("Task name that will be updated:");
         String task = sc.nextLine();
@@ -44,14 +45,15 @@ public class TaskMethods extends DBMethods{
         System.out.print("New task name: ");
         String new_task = sc.nextLine();
 
-        updateTheTask(task, new_task);
+        updateTheTask(task, new_task, currentUser.getID());
     }
     public void taskDelete(){
+        setCurrentUser();
         System.out.print("Task name that will be deleted: ");
         //check if such task exists
         String task = sc.nextLine();
 
-        deleteTaskByName(task);
+        deleteTaskByName(task, currentUser.getID());
     }
     public void taskRead(){
         outputTasks(getUserId(currentUser.getUsername()));
@@ -67,14 +69,15 @@ public class TaskMethods extends DBMethods{
         return true;
     }
     public void taskDeadline(){
-        System.out.print("Enter task name: ");
-        String task = sc.next();
-        String stopDate = searchByTask(task);
+        setCurrentUser();
+        System.out.println("Enter task name: ");
+        String task = sc.nextLine();
+        String stopDate = searchByTask(task.toLowerCase(), currentUser.getID());
 
         String startDate =String.valueOf(LocalDate.now()) + " " + String.valueOf(LocalTime.now()).substring(0, 8) ;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if(Objects.equals(stopDate, null)){
-            System.out.print("No such task found!");
+            System.out.println("No such task found!");
             stopDate= sc.nextLine();
         }
         Date d1 = null;
@@ -90,9 +93,7 @@ public class TaskMethods extends DBMethods{
         int day = (int) TimeUnit.SECONDS.toDays(seconds);
         long hours = TimeUnit.SECONDS.toHours(seconds) - (day *24);
         long minute = TimeUnit.SECONDS.toMinutes(seconds) - (TimeUnit.SECONDS.toHours(seconds)* 60);
-        System.out.println("Deadline of " + task + " is in: " +Integer.toString(day) + " days " + Long.toString(hours) + " hours " + Long.toString(minute) + " minutes");
+        System.out.println("Deadline of \"" + task.toLowerCase() + "\" is in: " +Integer.toString(day) + " days " + Long.toString(hours) + " hours " + Long.toString(minute) + " minutes");
 
     }
-
-
 }

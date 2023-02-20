@@ -1,6 +1,5 @@
 import Interfaces.IPassword;
 import java.util.Scanner;
-
 public class Login extends DBMethods implements IPassword {
     static boolean regOrLog= false;
     public static User currentUser =new User();

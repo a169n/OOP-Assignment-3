@@ -18,7 +18,6 @@ public class Registration extends DBMethods implements IPassword {
         boolean hasUpperCase = false;
         boolean hasDigit = false;
         boolean hasSpecialChar = false;
-
         if (password.length() < 8) {
             System.out.println("Password must be at least 8 characters long! Please try again");
             return false;
