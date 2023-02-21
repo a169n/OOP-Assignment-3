@@ -3,13 +3,9 @@ public class DBMethods {
     Connection conn = connectToDb("postgres", "postgres", "d05");
     String table_name = "users ";
     Statement statement= null;
-    {
-        try {
+    {try {
             statement = conn.createStatement();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+        } catch (SQLException e) {throw new RuntimeException(e);}}
     ResultSet rs = null;
     public Connection connectToDb(String dbname, String username, String password) {
         try {
@@ -72,9 +68,7 @@ public class DBMethods {
             if (result.next()) {
                 int id = result.getInt("id");
                 return id;
-            } else {
-                return 0;
-            }
+            } else {return 0;}
         } catch (Exception e){System.out.println(e);}
         return 0;
     }
@@ -90,8 +84,8 @@ public class DBMethods {
         } catch (Exception e){System.out.println(e);}
     }
     public void sortByImportance(int user_id){
-            int[] importance = new int[100];
-            String[] task_names = new String[100];
+        int[] importance = new int[100];
+        String[] task_names = new String[100];
         try{
             String query = String.format("select * from %s where user_id='%s'" , "tasks",user_id);
             rs = statement.executeQuery(query);
@@ -100,8 +94,7 @@ public class DBMethods {
             while(rs.next()){
                 importance[counter]=rs.getInt("importance");
                 task_names[counter]=rs.getString("task_name");
-                counter++;
-            }
+                counter++;}
             int temp=0;
             String temp1;
             for(int i=0;i<=counter;i++){
@@ -114,13 +107,11 @@ public class DBMethods {
                         task_names[k]=task_names[k+1];
                         task_names[k+1]=temp1;
                     }
-                }
-                }
+                }}
             for(int i=0;i<counter;i++){
                 System.out.println(task_id+". "+task_names[i]+". Importance: "+importance[i]);
                 task_id++;
-            }
-            }
+            }}
         catch (Exception e){System.out.println(e);}
     }
     public void updateTheTask(String task, String new_task_name, int userId){
